@@ -1,0 +1,120 @@
+
+
+header{
+   width: 100%;
+    max-width: 100%;
+}
+
+.navBar {
+    display: flex;
+    background-color: #03565C;
+    padding: 1rem;
+
+
+}
+
+.logo {
+    display: flex;
+    flex: 1.5;
+    background-color: #03565C;
+    padding: 0 1rem 2rem 2rem;
+
+}
+.title{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.logo h1, .logo span{
+    color: #FFFFFF;
+}
+.logo h1{
+    margin-bottom: 1rem;
+    font-family: 'Pacifico', cursive;
+    display: inline-block;
+}
+
+
+.inputSearch {
+    display: flex;
+    align-items: center;
+    flex: 2;
+
+}
+
+.inputSearch input {
+    width: 90%;
+    border: none;
+    background-color: #F0F0F0;
+    border-radius: 0.5rem 0 0 0.5rem;
+    outline: none;
+    font-size: 0.8rem;
+    color: #333;
+    padding: 1rem;
+}
+
+.inputSearch img{
+    border: solid 1px #F0F0F0 ;
+    padding: 0.655rem;
+    background-color: #F0F0F0;
+    border-radius: 0 0.5rem  0.5rem 0 ;
+}
+.inputSearch #openBook{
+    border:0;
+    padding: 1rem;
+    background-color: #03565C;
+}
+
+.account {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    flex: 2;
+
+}
+.account a{
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.account :nth-child(1) {
+    margin:0 0.5rem 0 2rem;
+
+
+}
+.account :nth-child(2) {
+    margin:0 0.6rem 0 0.3rem;
+
+
+}
+.account :nth-child(3) {
+    margin:0 1rem 0 1rem;
+
+
+}
+.account :nth-child(4) {
+    margin:0 1rem 0 0.5rem;
+
+
+}
+
+.account #library {
+    margin-left: 13px;
+
+}
+.account #books {
+    margin-left: 23px;
+
+}
+.account #user {
+    margin-left: 30px;
+
+}
+.account #cart {
+    margin-left: 25px;
+
+}
+
+
+

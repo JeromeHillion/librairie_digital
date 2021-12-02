@@ -1,0 +1,33 @@
+.containerGeneral
+{
+display: flex;
+padding: 2rem;
+}
+.container
+{
+    flex: 0.5;
+    
+}
+.catalog
+{
+    display: flex;
+    flex-direction: column;
+    border-bottom: solid 0.1rem #ccc;
+    flex: 0.8;
+}
+
+.import h3
+{
+    display: inline-block;
+}
+
+#importJson{
+    float: right;
+    margin-top: 0.52rem;
+    background-color: #03565C;
+    color: #fff;
+    padding: 0.7rem;
+    border: none;
+    border-radius: 1.5rem;
+    cursor: pointer;
+}
