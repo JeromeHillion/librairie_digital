@@ -20,21 +20,67 @@ class CategoryRepository
         $this->connection = new Connection();
     }
 
-    public function findById(int $id)/*: ? Category  */
+
+    public function save($name)
     {
-        /* $request = $this->connection->connectionToBdd()->prepare('SELECT * FROM' . $this->t_name . 'WHERE id = :id', [
-            'id' => $id
-        ]);
+        $found = $this->findCategoryByName($name);
 
-        if (!sizeof($request)) {
-            return null;
+        if (!$found)
+        {
+            //Si la catégorie n'existe pas on l'ajoute
+            $pdo = $this->connection->getConnectionToBdd();
+            $req = $pdo->prepare("INSERT INTO `category` (name) VALUES(:name)");
+
+            $req->bindValue(':name', ucfirst($name));
+
+            $req->execute();
         }
-
-        $category = new Category;
-        $category->setId(array_shift($request));
-        return $category; */
     }
 
+    public function delete($id)
+    {
+       
+        $pdo = $this->connection->getConnectionToBdd();
+        $req= $pdo->prepare("DELETE FROM category WHERE id = :id");
+        $req->bindParam(':id', $id, PDO::PARAM_INT);
+        $req->execute();
+    }
+
+    public function findCategoryById(int $id)
+    {
+        $pdo = $this->connection->getConnectionToBdd();
+
+        $req = $pdo->prepare("SELECT id FROM `category` WHERE id= ?");
+        $req->execute([$id]);
+        $res = $req->fetch();
+
+        return $res;
+    }
+
+    public function findCategoryByName($name)
+    {
+        $pdo = $this->connection->getConnectionToBdd();
+
+        $req = $pdo->prepare("SELECT name FROM `category` WHERE name= ?");
+        $req->execute([$name]);
+        $res = $req->fetch();
+
+        return $res;
+    }
+    public function getCategories()
+    {
+
+        $pdo = $this->connection->getConnectionToBdd();
+
+        $req = $pdo->prepare("SELECT * FROM `category`");
+        $req->execute();
+        $res = $req->fetchAll(PDO::FETCH_ASSOC);
+
+        return $res;
+    }
+
+    
+    
 
     /*  public  function saveCategoryToJson()
     { */
@@ -75,42 +121,4 @@ class CategoryRepository
 
         }
     } */
-
-    public function save($name)
-    {
-        $found = $this->findCategoryByName($name);
-
-        if (!$found)
-        {
-            //Si la catégorie n'existe pas on l'ajoute
-            $pdo = $this->connection->getConnectionToBdd();
-            $req = $pdo->prepare("INSERT INTO `category` (name) VALUES(:name)");
-
-            $req->bindValue(':name', ucfirst($name));
-
-            $req->execute();
-        }
-    }
-
-    public function findCategoryByName($name)
-    {
-        $pdo = $this->connection->getConnectionToBdd();
-
-        $req = $pdo->prepare("SELECT name FROM `category` WHERE name= ?");
-        $req->execute([$name]);
-        $res = $req->fetch();
-
-        return $res;
-    }
-    public function getCategories()
-    {
-
-        $pdo = $this->connection->getConnectionToBdd();
-
-        $req = $pdo->prepare("SELECT name FROM `category`");
-        $req->execute();
-        $res = $req->fetchAll(PDO::FETCH_ASSOC);
-
-        return $res;
-    }
 }

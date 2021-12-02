@@ -7,7 +7,7 @@ use const App\Bdd\DB_NAME;
 use const App\Bdd\DB_PASSWORD;
 use const App\Bdd\DB_USER;
 
-require_once '../Bdd/Config.php';
+require_once 'Config.php';
 
 
 
