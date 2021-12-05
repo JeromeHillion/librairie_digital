@@ -3,6 +3,7 @@
 class Book
 {
     protected int $id;
+    protected int $isbn;
     protected string $cover;
     protected dateTime $publication;
     protected string $summary;
@@ -10,16 +11,7 @@ class Book
     protected int $author_id;
 
     
-    /**
-     * __construct
-     *
-     * @param  mixed $cover
-     * @param  mixed $publication
-     * @param  mixed $summary
-     * @param  mixed $category_id
-     * @param  mixed $author_id
-     * @return void
-     */
+    
     public function __construct()
     {
         
@@ -33,6 +25,16 @@ class Book
     public function setId($id)
     {
         $this->id = $id;
+    }
+
+    public function getIsbn(): int
+    {
+        return $this->isbn;
+    }
+
+    public function setIsbn($isbn)
+    {
+        $this->isbn = $isbn;
     }
 
     public function getCover(): string
