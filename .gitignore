@@ -1,1 +1,6 @@
-/nbproject/private/
+##Composer
+vendor
+composer.lock
+
+#vscode
+.vscode
