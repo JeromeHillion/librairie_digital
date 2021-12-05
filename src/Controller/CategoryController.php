@@ -9,6 +9,5 @@ require '../../vendor/autoload.php';
 $category = new CategoryRepository;
 
 
-
 $categories = $category->getCategories();
 require '../Vue/Admin/category.php';

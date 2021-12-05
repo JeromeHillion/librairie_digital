@@ -50,7 +50,7 @@ class CategoryRepository
     {
         $pdo = $this->connection->getConnectionToBdd();
 
-        $req = $pdo->prepare("SELECT id FROM `category` WHERE id= ?");
+        $req = $pdo->prepare("SELECT * FROM `category` WHERE id= ? ORDER BY id ASC");
         $req->execute([$id]);
         $res = $req->fetch();
 
