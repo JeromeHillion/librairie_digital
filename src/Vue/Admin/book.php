@@ -21,8 +21,8 @@
 
         <div class="container">
             <div class="book">
-                <h2>Ajout de livre</h2>
-                <h3>Veuillez renseigner les champs suivants</h3>
+                <h2 class="primary-color">Ajout de livre</h2>
+                <h3 class="secondary-color">Veuillez renseigner les champs suivants</h3>
 
                 <form action="">
                     <label for="name">Nom</label>
@@ -31,7 +31,6 @@
                     <label for="isbn">ISBN</label>
                     <input type="text" name="isbn" id="">
 
-                    <div class="section">
                     
                     <label for="category">Choisisser une catégorie :</label>
                     <select name="category">
@@ -47,8 +46,6 @@
                     <label for="author">Auteur</label>
                     <input type="text" name="author" id="">
 
-                    </div>
-
                     <label for="cover">Image</label>
                     <input type="text" name="cover" id="">
 
@@ -56,7 +53,7 @@
                     <input type="date" name="publication" id="">
 
                     <label for="summary">Résumé</label>
-                    <input type="text" name="summary" id="">
+                    <textarea rows="15" cols="150" name="summary" id=""></textarea>
                 </form>
 
             </div>

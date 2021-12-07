@@ -22,14 +22,13 @@
         <div class="container">
             <div class="formCategories">
                 <h2 class="primary-color">Gestion des catégories</h2>
-                    <h3 class="secondary-color">Ajout de catégorie</h3>
-                    <form action="CrudCategory/AddCategoryController.php" method="POST">
-                        <label for="categoryName">Nom de la catégorie</label>
-                        <input type="text" name="categoryName" id="categoryName" required='required'>
-                        <input type="submit" id="btnAdd" value="Ajouter">
-                    </form>
+                <h3 class="secondary-color">Ajout de catégorie</h3>
+                <form method="$_POST">
+                    <input type="text" name="categoryName" id="categoryName" placeholder="Entrer le nom de la catégorie ...">
+                    <input type="submit" id="btnAdd" value="Ajouter">
+                </form>
             </div>
-            <?php if ($categories) : ?>
+           
                 <table>
                     <thead>
                         <tr>
@@ -38,25 +37,13 @@
                             <th width="130rem">Action</th>
                         </tr>
                     </thead>
-                    <tbody>
-
-                        <?php foreach ($categories as $category) : ?>
-
-                            <form action='CrudCategory/DeleteCategoryController.php' method='POST'>
-                                <tr>
-                                    <td>
-                                        <input type="hidden" name='categoryId' value='<?= $category['id']?>'>
-                                    <?= $category['id']?></td>
-                                    <td><?= $category['name'] ?></td>
-                                    <td><input type='submit' id="btnDelete" value='Supprimer'></td>
-                                </tr>
-                            </form>
-                        <?php endforeach ?>
+                    <tbody id="dataCategories">
+                            
                     </tbody>
                 </table>
-            <?php endif ?>
-
+            
         </div>
+        <script src="../../public/js/Admin/category.js"></script>
 </body>
 
 </html>

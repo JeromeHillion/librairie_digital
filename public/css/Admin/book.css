@@ -1,17 +1,21 @@
-.containerGeneral
-{
-display: flex;
-padding: 2rem;
+.containerGeneral {
+  display: flex;
+  padding: 2rem;
 }
 
 /* formulaire */
 
-label[for="cover"],label[for="publication"], label[for="summary"]
-{
-display: block;
+label[for="cover"],
+label[for="publication"],
+label[for="summary"] {
+  display: block;
 }
 
-.section
-{
-    padding: 2rem 0 2rem 0;
+.container {
+  padding: 2rem;
+  flex: 1;
+  background-color: #fff;
+  border: solid 1px #ccc;
 }
+
+
