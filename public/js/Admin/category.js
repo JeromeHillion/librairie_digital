@@ -1,8 +1,6 @@
 "use strict";
 
 /************************Déclaration de  Variables************************/
-let form = document.querySelector("form");
-let categoryName = document.getElementById("categoryName").value;
 let currentUrl = location.href;
 const addUrl = currentUrl.replace(
   "CategoryController.php",
@@ -18,77 +16,76 @@ const deleteUrl = currentUrl.replace(
   "CrudCategory/DeleteCategoryController.php"
 );
 
-let table = (document.querySelector("table").style.display = "none");
-let tbody = document.getElementById("dataCategories");
-
 /************************DOM************************/
 
-document.addEventListener("DOMContentLoaded", () => {
-  getCategories();
-
-  form.addEventListener("submit", (event) => {
+$(function () {
+  $("#btnAdd").click(function (event) {
     event.preventDefault();
-    addCategory();
+    add();
+  });
+
+  $(".btnDelete").click(function (event) {
+    event.preventDefault();
+    let trId = $(this).parent().parent().attr("id");
+    deleteById(trId);
+    $(this).parent().parent().remove();
   });
 });
 
 /************************Functions************************/
-function addCategory() {
-  /* if (categoryName === "")
-  {
-    console.log(categoryName.value);
-   
-  } */
 
-  /*   else
-  { */
-  const data = new URLSearchParams();
-  for (const category of new FormData(form)) {
-    data.append(category[0], category[1]);
+function add() {
+  let name = $("#categoryName").val();
+
+  if (name != "") {
+    let req = "";
+    $.ajax({
+      type: "GET",
+      url: readUrl,
+      dataType: "json",
+      success: function (data) {
+        req = categoryExist(data, name);
+        if (req === undefined) {
+          $.ajax({
+            url: addUrl,
+            type: "POST",
+            data: "name=" + name,
+          });
+
+          $("#dataCategories").append(
+            "<tr><td>" +
+              name +
+              "</td><td><input type='button' class='btnDelete' value ='supprimer'></td></tr>"
+          );
+        } else {
+          categoryExist(data, name);
+        }
+      },
+
+      error: function () {
+        console.log("json not found");
+      },
+    });
+  } else {
+    $("#categoryName").css("border-color", "#D50000");
+    $("#empty").css("display", "block");
   }
-
-  fetch(addUrl, {
-    method: "POST",
-    body: data,
-  })
-    .then((response) => {
-      return response.json();
-    })
-}
-/* } */
-
-async function getCategories() {
-  await fetch(readUrl)
-    .then((response) => response.json())
-    .then((json) => showCategories(json))
-    .catch((err) => console.log(err));
 }
 
-function showCategories(json) {
-  if (json) {
-    table = document.querySelector("table").style.display = "block";
+function deleteById(id) {
+  $.ajax({
+    url: deleteUrl,
+    type: "POST",
+    data: "id=" + id,
+  });
+}
 
-    for (const category in json) {
-      let tr = document.createElement("tr");
-      let tdId = document.createElement("td");
-      tdId.innerText = json[category]["id"];
-
-      let tdName = document.createElement("td");
-      tdName.innerText = json[category]["name"];
-
-      let tdBtnDelete = document.createElement("td");
-      let btnDelete = document.createElement("input");
-      btnDelete.type = "submit";
-      btnDelete.id = "btnDelete";
-      btnDelete.value = "supprimer";
-
-      tbody.append(tr);
-      tr.append(tdId);
-      tr.append(tdName);
-      tr.append(tdBtnDelete);
-      tdBtnDelete.append(btnDelete);
+function categoryExist(data, name) {
+  for (const category in data) {
+    if (data[category]["name"] === name[0].toUpperCase() + name.slice(1)) {
+      $("#categoryName").css("border-color", "#D50000");
+      $("#exists").css("display", "block");
+      return data[category]["name"];
     }
   }
 }
-
-function deleteCategory() {}

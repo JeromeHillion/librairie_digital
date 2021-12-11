@@ -23,26 +23,36 @@
             <div class="formCategories">
                 <h2 class="primary-color">Gestion des catégories</h2>
                 <h3 class="secondary-color">Ajout de catégorie</h3>
-                <form method="$_POST">
-                    <input type="text" name="categoryName" id="categoryName" placeholder="Entrer le nom de la catégorie ...">
+                <form>
+                    <input type="text" name="categoryName" id="categoryName">
                     <input type="submit" id="btnAdd" value="Ajouter">
+                    <span id ="empty">Le champs est vide !</span>
+                    <span id ="exists">La catégorie existe déjà !</span>
                 </form>
+                
             </div>
-           
+           <?php if($categories): ?>
                 <table>
                     <thead>
                         <tr>
-                            <th width="50rem">Id</th>
-                            <th width="800rem">Catégorie</th>
-                            <th width="130rem">Action</th>
+                            <th width="800rem">catégorie</th>
+                            <th width="130rem">action</th>
                         </tr>
                     </thead>
                     <tbody id="dataCategories">
-                            
+                    <form>
+                                <?php foreach($categories as $categorie): ?>
+                                <tr id = "<?= $categorie['id']?>">
+                                    <td><?= $categorie['name']?></td>
+                                    <td><input type='submit' class='btnDelete' value ='supprimer'></td>
+                                </tr>
+                                <?php endforeach;?>
+                                </form>
                     </tbody>
                 </table>
-            
+            <?php endif; ?>
         </div>
+        <script src="../../public/js/jquery.js"></script>
         <script src="../../public/js/Admin/category.js"></script>
 </body>
 
