@@ -19,12 +19,12 @@ const deleteUrl = currentUrl.replace(
 /************************DOM************************/
 
 $(function () {
-  $("#btnAdd").click(function (event) {
+  $("#btnAdd").on("click", function (event) {
     event.preventDefault();
     add();
   });
 
-  $(".btnDelete").click(function (event) {
+  $(".btnDelete").on("click", function (event) {
     event.preventDefault();
     let trId = $(this).parent().parent().attr("id");
     deleteById(trId);
@@ -38,6 +38,9 @@ function add() {
   let name = $("#categoryName").val();
 
   if (name != "") {
+    $("#categoryName").css("border-color", "#ccc");
+    $("#empty").css("display", "none");
+
     let req = "";
     $.ajax({
       type: "GET",
@@ -57,6 +60,9 @@ function add() {
               name +
               "</td><td><input type='button' class='btnDelete' value ='supprimer'></td></tr>"
           );
+          $("#categoryName").css("border-color", "#ccc");
+          $("#empty").css("display", "none");
+          $("#categoryName").val("");
         } else {
           categoryExist(data, name);
         }
@@ -85,7 +91,10 @@ function categoryExist(data, name) {
     if (data[category]["name"] === name[0].toUpperCase() + name.slice(1)) {
       $("#categoryName").css("border-color", "#D50000");
       $("#exists").css("display", "block");
+      $("#categoryName").val("");
       return data[category]["name"];
+    } else {
+      $("#exists").css("display", "none");
     }
   }
 }

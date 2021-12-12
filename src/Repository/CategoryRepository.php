@@ -21,7 +21,7 @@ class CategoryRepository
     }
 
 
-    public function save($name)
+    public function save(string $name)
     {
         $found = $this->findCategoryByName($name);
 
@@ -37,7 +37,7 @@ class CategoryRepository
         }
     }
 
-    public function delete($id)
+    public function delete(int $id)
     {
        
         $pdo = $this->connection->getConnectionToBdd();
@@ -57,11 +57,11 @@ class CategoryRepository
         return $res;
     }
 
-    public function findCategoryByName($name)
+    public function findCategoryByName(string $name)
     {
         $pdo = $this->connection->getConnectionToBdd();
 
-        $req = $pdo->prepare("SELECT name FROM `category` WHERE name= ?");
+        $req = $pdo->prepare("SELECT * FROM `category` WHERE name= ?");
         $req->execute([$name]);
         $res = $req->fetch();
 

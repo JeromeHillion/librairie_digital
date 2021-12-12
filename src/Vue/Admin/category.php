@@ -41,9 +41,9 @@
                     </thead>
                     <tbody id="dataCategories">
                     <form>
-                                <?php foreach($categories as $categorie): ?>
-                                <tr id = "<?= $categorie['id']?>">
-                                    <td><?= $categorie['name']?></td>
+                                <?php foreach($categories as $category): ?>
+                                <tr id = "<?= $category['id']?>">
+                                    <td><?= $category['name']?></td>
                                     <td><input type='submit' class='btnDelete' value ='supprimer'></td>
                                 </tr>
                                 <?php endforeach;?>
