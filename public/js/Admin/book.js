@@ -3,17 +3,17 @@
 /************************Déclaration de  Variables************************/
 let currentUrl = location.href;
 const addUrl = currentUrl.replace(
-  "CategoryController.php",
-  "CrudCategory/AddBookController.php"
+  "BookController.php",
+  "CrudBook/AddBookController.php"
 );
 const readUrl = currentUrl.replace(
-  "CategoryController.php",
-  "CrudCategory/ReadBookController.php"
+  "BookController.php",
+  "CrudBook/ReadBookController.php"
 );
 
 const deleteUrl = currentUrl.replace(
-  "CategoryController.php",
-  "CrudCategory/DeleteCategoryController.php"
+  "BookController.php",
+  "CrudBook/DeleteBookController.php"
 );
 
 
@@ -23,7 +23,23 @@ $(function () {
     add();
     $("#btnAdd").on("click", function (event) {
         event.preventDefault();
-        console.log("OK !");
+        let name = encodeURIComponent($("#name").val());
+    let isbn = encodeURIComponent($("#isbn ").val());
+    let category = encodeURIComponent($("#category option:selected").text());
+    let author = encodeURIComponent($("#author").val());
+    let cover = encodeURIComponent($("#cover").val());
+    let publication = encodeURIComponent($("#publication").val());
+    let summary = encodeURIComponent($("#summary").val());
+
+    if (name != "" && isbn != "" && category != "" && author != "" && cover != "" && publication != "" && summary != "") {
+      $.ajax(
+        {
+            url: addUrl,
+            type: "POST",
+            data: "name="+name+"&isbn="+isbn+"&category="+category+"&author="+author+"&cover="+cover+"&publication="+publication+"&summary="+summary
+        }
+    ); 
+    }
       });
 });
 
@@ -42,13 +58,13 @@ function add()
     let summary = encodeURIComponent($("#summary").val());
 
     if (name != "" && isbn != "" && category != "" && author != "" && cover != "" && publication != "" && summary != "") {
-        
-    }
-    $.ajax(
+      $.ajax(
         {
             url: addUrl,
             type: "POST",
             data: "name="+name+"&isbn="+isbn+"&category="+category+"&author="+author+"&cover="+cover+"&publication="+publication+"&summary="+summary
         }
-    );
+    ); 
+    }
+    
 }

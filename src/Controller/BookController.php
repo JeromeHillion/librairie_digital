@@ -13,4 +13,6 @@ $categories = $categoryRepository->getCategories();
 
 $bookRepository = new BookRepository;
 $books = $bookRepository->getBooks();
+
+/* var_dump($books); */
 require '../Vue/Admin/book.php';

@@ -1,12 +1,14 @@
 <?php
 
+use App\Entity\Book;
+use App\Manager\DateManager;
 use App\Repository\AuthorRepository;
 use App\Repository\BookRepository;
 use App\Repository\CategoryRepository;
 
 require '../../../vendor/autoload.php';
 
-$book = new BookRepository;
+
 $isbn = $_POST['isbn'];
 $cover = $_POST['cover'];
 $name = $_POST['name'];
@@ -17,19 +19,36 @@ $author = $_POST['author'];
 
 if (isset($isbn) && isset($cover) && isset($name) && isset($publication) && isset($summary) && isset($category) && isset($author)) {
 
+
+    $dateManager = new DateManager();
+    $datePublication = $dateManager->parseDateElementToInt($publication);
+    
     $categoryRepository = new CategoryRepository;
-    $datasCategory =$categoryRepository->findCategoryByName($category);
-
-    $authorRepository = new AuthorRepository();
-    $datasAuthor = $AuthorRepository->findAuthorByName($author);
-
+    $datasCategory = $categoryRepository->findCategoryByName($category);
+  
+        $category_id = intval($datasCategory['id']);
     
 
-    $book = new Book;
+    $authorRepository = new AuthorRepository();
+    $datasAuthor = $authorRepository->findAuthorByName($author);
+    if(!$datasAuthor){
+        $authorRepository->save($author);
+    }
+
+    else{
+        $author_id = intval($datasAuthor['id']) ;
+    }
+
+
     $bookRepository = new BookRepository;
-    $bookRepository->save($book);
+    $datasBook = $bookRepository->findByName($name);
+
+    if (!$datasBook) {
+        $bookRepository->save($isbn,$cover,$name,$publication,$summary,$category_id,$author_id);  
+       
+    }
+     header('Location: ../BookController.php');
 }
 
 
-header('Location: ../CategoryController.php');
 

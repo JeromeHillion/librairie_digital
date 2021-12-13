@@ -5,16 +5,29 @@ namespace App\Repository;
 use PDO;
 use App\Bdd\Connection;
 
- class AuthorRepository
+class AuthorRepository
 {
 
     protected Connection $connection;
-    
+
 
     public function __construct()
     {
         $this->connection = new Connection();
     }
+
+    public function save(string $name)
+    {
+        $found = $this->findAuthorByName(ucfirst($name));
+
+        if (!$found) {
+            $pdo = $this->connection->getConnectionToBdd();
+        $req = $pdo->prepare("INSERT INTO author(name) VALUES(:name)");
+        $req->bindValue("name", ucfirst($name));
+        $req->execute();
+    }
+        }
+       
 
     public function findAuthorByName(string $name)
     {
@@ -25,7 +38,7 @@ use App\Bdd\Connection;
         $res = $req->fetch();
 
         if (!sizeOf($res)) {
-            return [];
+            return null;
         }
         return $res;
     }

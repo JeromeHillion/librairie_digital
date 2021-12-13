@@ -1,21 +1,54 @@
 .containerGeneral {
   display: flex;
-  padding: 2rem;
+
+ 
 }
 
 /* formulaire */
 
-label[for="cover"],
-label[for="publication"],
-label[for="summary"] {
+form{
+  background-color: #F0F0F0;
+  width: 90%;
+  padding: 2rem;
+  max-width: 100%;
+  border: solid 1px #ccc;
+  box-shadow: 0 5px 10px 5px #ccc;
+  border-radius: 0.5rem;
+  
+}
+
+label, #btnAdd {
   display: block;
+ 
+}
+form input, form select, form textarea
+{
+  margin: 0 0 1rem;
+  border: solid 1px #ccc;
+  
+}
+
+form input[type="text"]
+{
+  width: 100%;
+  max-width: 100%;
 }
 
 .container {
-  padding: 2rem;
+  padding: 2.5rem;
   flex: 1;
   background-color: #fff;
   border: solid 1px #ccc;
+}
+
+h1{
+  border-bottom: 1px #eee solid;
+  
+}
+
+h1,h2,h3{
+  font-family: inherit;
+  font-weight: 500;
 }
 
 

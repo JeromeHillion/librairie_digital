@@ -1,9 +1,13 @@
 <?php
 
+namespace App\Entity;
+use DateTime;
+
 class Book
 {
     protected int $id;
     protected int $isbn;
+    protected string $name;
     protected string $cover;
     protected dateTime $publication;
     protected string $summary;
@@ -37,6 +41,16 @@ class Book
         $this->isbn = $isbn;
     }
 
+    public function getName(): string
+    {
+       return $this->name;
+    }
+
+    public function setName($name)
+    {
+        $this->name =$name;
+    }
+
     public function getCover(): string
     {
         return $this->cover;
@@ -44,7 +58,7 @@ class Book
 
     public function setCover($cover)
     {
-        $this->nom = $cover;
+        $this->cover = $cover;
     }
 
     public function getPublication(): DateTime 
@@ -74,7 +88,7 @@ class Book
 
     public function setCategoryId($category_id)
     {
-        $this->nom = $category_id;
+        $this->category_id = $category_id;
     }
 
     public function getAuthorId(): int

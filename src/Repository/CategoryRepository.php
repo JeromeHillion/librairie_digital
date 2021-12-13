@@ -52,7 +52,7 @@ class CategoryRepository
 
         $req = $pdo->prepare("SELECT * FROM `category` WHERE id= ?");
         $req->execute([$id]);
-        $res = $req->fetch();
+        $res = $req->fetch(PDO::FETCH_ASSOC);
 
         return $res;
     }

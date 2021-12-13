@@ -21,8 +21,8 @@
 
         <div class="container">
             <div class="book">
-                <h2 class="primary-color">Ajout de livre</h2>
-                <h3 class="secondary-color">Veuillez renseigner les champs suivants</h3>
+                <h1>Ajout de livre</h1>
+                <h3 class="primary-color">Veuillez renseigner les champs suivants</h3>
 
                 <form>
                     <label for="name">Nom</label>
@@ -34,9 +34,9 @@
                     
                     <label for="category">Choisisser une catégorie :</label>
                    
-                    <select name="category">
+                    <select name="category" id="category">
                     <?php foreach($categories as $category) : ?>
-                        <option id="categorye" value=""><?=$category['name']?></option>
+                        <option  value=""><?=$category['name']?></option>
                         <?php endforeach; ?>
                     </select>
 
@@ -50,7 +50,7 @@
                     <input type="date" name="publication" id="publication">
 
                     <label for="summary">Résumé</label>
-                    <textarea rows="15" cols="150" name="summary" id="summary"></textarea>
+                    <textarea rows="10" cols="50" name="summary" id="summary"></textarea>
 
                     <input type="submit" id="btnAdd" value="Ajouter">
                 </form>
