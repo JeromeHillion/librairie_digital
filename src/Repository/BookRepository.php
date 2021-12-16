@@ -27,22 +27,25 @@ class BookRepository
         return $res;
     }
 
-    public function save($isbn,$cover,$name,$publication,$summary,$category_id,$author_id )
+    public function save($book)
 
     {
  
             $pdo = $this->connection->getConnectionToBdd();
 
             $req = $pdo->prepare("INSERT INTO `book` (isbn,cover,name,publication,summary,category_id,author_id) VALUES(:isbn,:cover,:name,:publication,:summary,:category_id,:author_id)");
-            $req->bindValue("isbn",ucfirst($isbn) );
-            $req->bindValue("cover",$cover);
-            $req->bindValue("name",ucfirst($name));
-            $req->bindValue("publication",ucfirst($publication));
-            $req->bindValue("summary",ucfirst($summary));
-            $req->bindValue("category_id",$category_id);
-            $req->bindValue("author_id",$author_id);
-            $req->execute();
+            $req->bindValue("isbn",$book->getIsbn());
+            $req->bindValue("cover",$book->getCover());
+            $req->bindValue("name",ucfirst($book->getName()));
+            $req->bindValue("publication",$book->getPublication()->format('Y-m-d'));
+            $req->bindValue("summary",ucfirst($book->getSummary()));
+            $req->bindValue("category_id",$book->getCategoryId());
+            $req->bindValue("author_id",$book->getAuthorId());
+            $res = $req->execute();
        
+            if (!$res) {
+               $req->errorInfo();
+            }
     }
 
     public function findByName(string $name)
@@ -65,10 +68,6 @@ class BookRepository
         $req->execute([$id]);
         $res = $req->fetch();
 
-        if (!sizeOf($res)) {
-            return null;
-           
-        }
         return $res;
     }
 

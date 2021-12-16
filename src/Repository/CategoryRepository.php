@@ -65,6 +65,7 @@ class CategoryRepository
         $req->execute([$name]);
         $res = $req->fetch();
 
+        
         return $res;
     }
     public function getCategories()

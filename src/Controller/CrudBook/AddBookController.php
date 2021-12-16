@@ -19,24 +19,32 @@ $author = $_POST['author'];
 
 if (isset($isbn) && isset($cover) && isset($name) && isset($publication) && isset($summary) && isset($category) && isset($author)) {
 
+    $book = new Book();
+
+    $book->setIsbn($isbn);
+    $book->setCover($cover);
+    $book->setName($name);
 
     $dateManager = new DateManager();
     $datePublication = $dateManager->parseDateElementToInt($publication);
-    
+    $book->setPublication($datePublication);
+
+    $book->setSummary($summary);
+
     $categoryRepository = new CategoryRepository;
+    /* $category = str_replace("+","",$category); */
     $datasCategory = $categoryRepository->findCategoryByName($category);
-  
-        $category_id = intval($datasCategory['id']);
-    
+
+    $category_id =  intval($datasCategory['id']);
+    $book->setCategoryId($category_id);
 
     $authorRepository = new AuthorRepository();
     $datasAuthor = $authorRepository->findAuthorByName($author);
-    if(!$datasAuthor){
+    if (!$datasAuthor) {
         $authorRepository->save($author);
-    }
-
-    else{
-        $author_id = intval($datasAuthor['id']) ;
+    } else {
+        $author_id = intval($datasAuthor['id']);
+        $book->setAuthorId($author_id);
     }
 
 
@@ -44,11 +52,7 @@ if (isset($isbn) && isset($cover) && isset($name) && isset($publication) && isse
     $datasBook = $bookRepository->findByName($name);
 
     if (!$datasBook) {
-        $bookRepository->save($isbn,$cover,$name,$publication,$summary,$category_id,$author_id);  
-       
+        $bookRepository->save($book);
     }
-     header('Location: ../BookController.php');
+    header('Location: ../BookController.php');
 }
-
-
-
